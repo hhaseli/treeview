@@ -1,0 +1,67 @@
+@charset "utf-8";
+.treeview{
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+	margin:0px;
+	padding:0px;
+}
+.treeview li{
+	list-style-type: none;
+	padding:0px;
+	margin:0px;
+}
+.treeview .collapsable{
+	list-style-type: none;
+	background-image:none;
+}
+.treeview .expandable{
+	list-style-type: none;
+	background-image:none;
+}
+.treeview .hitarea{
+	width:16px;
+	height:16px;
+	display: inline-block;
+	cursor:pointer;
+}
+.treeview .collapsable .hitarea{
+	background-image:url(../images/bullet_delete.png);
+	background-repeat: no-repeat;
+	background-position: 0px 4px;
+}
+.treeview .expandable .hitarea{
+	background-image:url(../images/bullet_add.png);
+	background-repeat: no-repeat;
+	background-position: 0px 4px;
+}
+.treeview .collapsable li,.treeview .expandable li{
+	background-image:url(../images/page.png);
+	background-repeat: no-repeat;
+	padding-left:20px;
+	background-position: 0 center;
+}
+.treeview span{
+	background-image: url(../images/page.png);
+	background-repeat: no-repeat;
+	background-position: 0px center;
+	padding-left: 20px;
+}
+.treeview .collapsable span,.treeview .expandable span{
+	background-repeat: no-repeat;
+	padding-left:20px;
+	background-position: 0 center;
+}
+.treeview .collapsable span{
+	background-image:url(../images/door_open.png);
+}
+.treeview .expandable span{
+	background-image:url(../images/door.png);
+}
+.treeview li .collapsable,.treeview li .expandable{
+	background-image:none;
+	padding:0;
+}
+.treeview .expanded{
+	display:none;
+}
