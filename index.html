@@ -9,13 +9,28 @@
 $(document).ready(function ($) {
     $('#treeview').treeview({command:"create"});
     $('#treeview2').treeview();
-    $('#treeview2').treeview({command:"destroy"});	
+    $('#treeview2').treeview({command:"destroy all"});	
+    $("#create").click(function(){
+	    $('#treeview2').treeview({command:"create"});
+    });	
+    $("#destroy").click(function(){
+	    $('#treeview2').treeview({command:"destroy"});
+    });	
+	$("#destroyAll").click(function(){
+	    $('#treeview2').treeview({command:"destroy all"});
+    });	
 });
 </script>
 <link href="css/treeview.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
+<div id="controler">
+<input type="button" value="Create" id="create" />
+<input type="button" value="Destroy" id="destroy" />
+<input type="button" value="Destroy All" id="destroyAll" />
+</div>
+<div class="treeviewContainer">
 <ul id="treeview">
 	<li><span>head 1</span>
     	<ul>
@@ -113,6 +128,7 @@ $(document).ready(function ($) {
         </ul>
      </li>
 </ul>
+</div>
 <h6><a href="http://www.famfamfam.com/lab/icons/silk/">Icons by famfamfam</a></h6>
 </body>
 </html>

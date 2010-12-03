@@ -5,7 +5,7 @@
  * Copyright 2010, Hamid Haseli
  * Licensed under the GPL Version 3 licenses.
  *
- * Date: Fri Dec 03 15:53:20 2010 -0800
+ * Date: Fri Dec 03 21:00:00 2010 -8000
  */
 (function( $ ){
 $.fn.treeview = function(parameters) {
@@ -14,9 +14,11 @@ $.fn.treeview = function(parameters) {
 	};
 	$.extend(options, parameters);
 	
-	if(options.command == null || options.command == 'create'){
+	function create(selector){
+		// Making sure it doesn't have any old hitarea.
+		destroyer(selector,'destroy')
 		// Add treeview class to the element.
-		this.addClass('treeview treeviewGenerator');
+		selector.addClass('treeview treeviewGenerator');
 		// The addFirstClass is a class name that add to all 'li ul' elements of the element.
 		$(".treeviewGenerator li ul").addClass('addFirstClass');
 		// Make all the collapsable/expandable elemnts activate.
@@ -26,7 +28,7 @@ $.fn.treeview = function(parameters) {
 		// Make expandable uls expanded.
 		$('.treeviewGenerator .expandable ul:eq(0)').removeClass('collaped').addClass('expanded');
 		// Insert hitarea html.
-		$('<div class="hitarea"></div>').insertBefore('.treeviewGenerator .collapsable span');
+		$('<div class="hitarea"></div>').insertBefore('.treeviewGenerator .collapsable span,.treeviewGenerator .expandable span');
 		// Add the "last" class to li elements that are the end li of ul elements.
 		$(".treeviewGenerator :last-child:not(ul)").not(':not(li)').addClass('last');
 	
@@ -43,21 +45,32 @@ $.fn.treeview = function(parameters) {
 				thirdClassName = 'expanded';
 				fourthClassName = 'collaped';
 			}
-			
 			$(this).parent().addClass(secondClassName + ' hitParent').removeClass(firstClassName);
 			$('.hitParent ul:eq(0)').removeClass(thirdClassName).addClass(fourthClassName);
 			$('.hitParent').removeClass('hitParent');
 			
 		});
 		$('.treeviewGenerator').removeClass('treeviewGenerator');
+	
 	}
-	else if(options.command == 'destroy'){
-		this.addClass('treeviewDestroy')
+	function destroyer(selector,command){
+		selector.addClass('treeviewDestroy')
 		$('.treeviewDestroy').removeClass('treeview');
-		$(".treeviewDestroy li").removeClass('collapsable').removeClass('expandable').removeClass('last');
-		$(".treeviewDestroy ul").removeClass('collaped').removeClass('expanded');
+		if(command == 'destroy'){
+			$(".treeviewDestroy li").removeClass('last');
+		}
+		else if(command == 'destroy all'){
+			$(".treeviewDestroy li").removeClass('collapsable').removeClass('expandable').removeClass('last');
+			$(".treeviewDestroy ul").removeClass('collaped').removeClass('expanded');
+		}
 		$(".treeviewDestroy .hitarea").remove();
-		this.removeClass('treeviewDestroy');
+		selector.removeClass('treeviewDestroy');
+	}
+	if(options.command == null || options.command == 'create'){
+		create(this);
+	}
+	else if(options.command == 'destroy' ||options.command == 'destroy all' ){
+		destroyer(this,options.command);
 	}
 	};
 })( jQuery );

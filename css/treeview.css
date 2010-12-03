@@ -1,4 +1,9 @@
 @charset "utf-8";
+.treeviewContainer{
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	user-select: none;
+}
 .treeview{
 	-moz-user-select: none;
 	-khtml-user-select: none;
